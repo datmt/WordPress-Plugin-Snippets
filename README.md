@@ -51,7 +51,16 @@ add_action('admin_enqueue_scripts', 'core37_lp_form_load_backend_scripts', 1000)
 
 function core37_lp_form_load_backend_scripts()
 {
-
+	//you can perform a screen check here to make sure the scripts, styles only available on a specific page
+	/*
+	$currentScreen = get_current_screen();
+	if (stripos($currentScreen->base, 'screen-slug') !== false)
+	{
+		//register and enqueue styles/scripts here
+	}
+	
+	*/
+	//register and enqueue scripts
 	wp_register_script( 'script-handler', plugins_url( 'bundle/js/my-bundle.js', __FILE__ ), array(
 		'jquery',
 		'underscore',
@@ -59,6 +68,11 @@ function core37_lp_form_load_backend_scripts()
 	), false, true );
 	
 	wp_enqueue_script('script-handler', '', array(), false, true);
+	
+	//register and enqueue styles
+	wp_register_style('style-handler', plugins_url('bundle/css/editor-bundle.css', __FILE__));
+	
+	wp_enqueue_style('style-handler');
 
 }
 
